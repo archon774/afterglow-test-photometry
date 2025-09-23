@@ -8,7 +8,7 @@ astropy-iers-data==0.2025.5.19.0.38.36
 astroquery==0.4.10
 astroscrappy==1.2.0
 async-timeout==5.0.1
-authlib==1.6.0
+authlib==1.6.4
 backports-tarfile==1.2.0
 beautifulsoup4==4.13.4
 billiard==4.2.1
@@ -28,7 +28,7 @@ email-validator==2.2.0
 eventlet==0.40.0; sys_platform == "win32"
 exifread==3.3.1
 flask==3.1.1
-flask-cors==4.0.2
+flask-cors==6.0.0
 flask-login==0.6.3
 flask-principal==0.4.0
 flask-security-too==5.6.2
