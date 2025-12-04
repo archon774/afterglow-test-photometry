@@ -180,7 +180,7 @@ def run_cosmetic_correction_job(
             # Ensure float64 (Numba is faster and the cosmetic kernels expect this)
             if data.dtype != np.float64:
                 data = data.astype(np.float64)
-                
+
             initial_mask = flag_horiz(data, m=settings.m_col, nu=settings.nu_col)
             col_mask = flag_columns(initial_mask)
             pixel_mask = flag_pixels(data, col_mask, m=settings.m_pixel, nu=settings.nu_pixel)
@@ -192,10 +192,21 @@ def run_cosmetic_correction_job(
         for file_id in group:
             try:
                 data, hdr = get_data_file_data(job.user_id, file_id)
-                if data.dtype.name != 'float64':
-                    data = data.astype(np.float64)
+                if isinstance(data, np.ma.MaskedArray):
+                    # turn masked values into NaN, then drop MaskedArray wrapper
+                    data = data.filled(np.nan)
+
+                # Ensure we have a base ndarray
+                data = np.asarray(data)
+
+                # Ensure native endianness
                 if not data.dtype.isnative:
                     data = data.astype(data.dtype.newbyteorder())
+
+                # Ensure float64
+                if data.dtype != np.float64:
+                    data = data.astype(np.float64)
+                    
                 data = correct_cols_and_pixels(
                     data, col_mask, pixel_mask, m_col=settings.m_corr_col,
                     m_pixel=settings.m_corr_pixel)
