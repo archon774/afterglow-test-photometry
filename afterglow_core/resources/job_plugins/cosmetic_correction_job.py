@@ -167,9 +167,20 @@ def run_cosmetic_correction_job(
 
         # Extract cosmetic correction data
         try:
-            if data.dtype.name != 'float64':
-                # Numba is faster for 64-bit floating point
+            if isinstance(data, np.ma.MaskedArray):
+                data = data.filled(np.nan)
+
+            # Ensure we have a base ndarray
+            data = np.asarray(data)
+
+            # Ensure native endianness
+            if not data.dtype.isnative:
+                data = data.astype(data.dtype.newbyteorder())
+
+            # Ensure float64 (Numba is faster and the cosmetic kernels expect this)
+            if data.dtype != np.float64:
                 data = data.astype(np.float64)
+                
             initial_mask = flag_horiz(data, m=settings.m_col, nu=settings.nu_col)
             col_mask = flag_columns(initial_mask)
             pixel_mask = flag_pixels(data, col_mask, m=settings.m_pixel, nu=settings.nu_pixel)
