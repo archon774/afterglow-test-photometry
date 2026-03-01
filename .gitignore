@@ -123,6 +123,7 @@ MANIFEST
 # Locally generated data
 /*.db
 AFTERGLOW_CORE_KEY
+afterglow_core/default_cfg.py
 
 #Angular
 .angular
