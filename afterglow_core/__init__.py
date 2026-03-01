@@ -327,7 +327,7 @@ def create_app() -> Flask:
     logger = getLogger()
     logger.setLevel('INFO')
     logger.addHandler(AfterglowLogHandler(
-        os.path.join(os.environ.get('AFTERGLOW_LOGGING_ROOT', '/skynet/logs'), 'afterglow.log'),
+        os.path.join(os.environ.get('AFTERGLOW_LOGGING_ROOT', '../../afterglow-logs'), 'afterglow.log'),
         when='D', backupCount=10, max_bytes=1 << 20, encoding='utf8'))
 
     # noinspection PyShadowingNames
