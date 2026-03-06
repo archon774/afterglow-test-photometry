@@ -8,7 +8,7 @@ APPLICATION_ROOT = '/core'
 DASHBOARD_PREFIX = ''
 
 # Location of the general Afterglow Core data files
-DATA_ROOT = '.'
+DATA_ROOT = ''
 
 #Enable Flask debug mode for local dev
 DEBUG = True
@@ -169,7 +169,7 @@ JOB_SERVER_USER = 'guest'
 JOB_SERVER_PASS = ''
 
 # RabbitMQ broker virtual host
-JOB_SERVER_VHOST = 'afterglow'
+JOB_SERVER_VHOST = '/'
 
 # Maximum RAM in megabytes allowed to be allocated by certain memory-intensive
 # operations
