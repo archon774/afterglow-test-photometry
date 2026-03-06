@@ -25,7 +25,7 @@ DB_HOST = 'localhost'
 DB_PORT = 3306
 
 # Database server username/password
-DB_USER = 'afterglow_core'
+DB_USER = ''
 # Password must be encrypted with afterglow_core/scripts/encrypt.py
 DB_PASS = ''
 
